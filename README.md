@@ -28,3 +28,9 @@ sudo npm i -g json-server
 
 json-server --watch folderAPI/db.json
 ```
+
+## Servicios
+```
+ng g s modulo/services/nombreServicio --skip-tests  // Crear servicio sin archivo asociado de Tests
+```
+

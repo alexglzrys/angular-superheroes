@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     // Registrar el módulo con las rutas principales de la aplicación
-    AppRoutingModule
+    AppRoutingModule,
+    // Modulo que hace disponible el uso del servicio HTTP en nuestra aplicación
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
