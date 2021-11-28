@@ -13,3 +13,9 @@ ng g m nombreDelModulo
 ```
 ng g c nombreModulo/carpetaContenedora/NombreComponente
 ```
+
+- Las rutas principales de la aplicación pueden estar definidas a raíz de la aplicación, o dentro de un directorio llamado routes
+```
+ng g m appRouting --flat
+```
+El --flat genera el archivo de módulo sin una carpeta contenedora
