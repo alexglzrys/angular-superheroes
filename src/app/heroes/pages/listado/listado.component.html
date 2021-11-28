@@ -1,11 +1,20 @@
 <p>listado works!</p>
 
 
-<div fxLayout="row">
-  <div fxLayoutGap="25px" *ngFor="let heroe of heroes">
+<div fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutAlign="center"
+  fxLayoutGap="20px">
+  <div fxFlex.xl="calc(20% - 20px)"
+    fxFlex.lg="calc(25% - 20px)"
+    fxFlex.md="calc(33% - 20px)"
+    fxFlex.sm="calc(50% - 20px)"
+    fxFlex.xs="100"
+    class="card-item"
+    *ngFor="let heroe of heroes">
     <mat-card  class="example-card">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div mat-card-avatar class="example-header-image" [style]="'background-image: url(assets/heroes/'+ heroe.id +'.jpg); background-size: cover;'"></div>
         <mat-card-title>{{ heroe.superhero }}</mat-card-title>
         <mat-card-subtitle>{{ heroe.alter_ego }}</mat-card-subtitle>
       </mat-card-header>
