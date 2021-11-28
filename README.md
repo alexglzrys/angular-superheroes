@@ -20,3 +20,11 @@ ng g m appRouting --flat
 ng g m auth/authRouting --flat    // archivo de routing para el módulo auth
 ```
 El --flat genera el archivo de módulo sin una carpeta contenedora
+
+El paquete **JSON SERVER** permite instalar un servidor HTTP local el cual hace un fake API REST a partir de un archivo json
+- Esto es interesante para prácticar con Angular mediante su servicio HTTP sin que exista la necesidad de enfocar nuestra atención en crear un backend desde cero.
+```
+sudo npm i -g json-server
+
+json-server --watch folderAPI/db.json
+```
