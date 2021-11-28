@@ -12,6 +12,11 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
   {
+    path: 'heroes',
+    // Registrar las rutas del módulo Heroes como hijas de la aplicación
+    loadChildren: () => import('./heroes/heroes.module').then(m => m.HeroesModule),
+  },
+  {
     path: '404',
     // Cargar de forma explicita el componente (se requiere importar el componente en si)
     component: ErrorPageComponent
