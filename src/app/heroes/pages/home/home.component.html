@@ -1,27 +1,47 @@
 <mat-sidenav-container fullscreen class="example-container">
-  <mat-sidenav #sidenav mode="side">
-    Sidenav content
+  <mat-sidenav #sidenav mode="push">
+    <mat-toolbar>
+      <span class="me-4">Super Héroes App</span>
+      <button mat-icon-button class="example-icon" (click)="sidenav.close()" aria-label="Example icon-button with menu icon">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <!-- Material Icons
+      https://fonts.google.com/icons?selected=Material+Icons -->
+    <mat-nav-list>
+      <a [routerLink]="['listado']" mat-list-item (click)="sidenav.close()">
+        <mat-icon mat-list-icon>sell</mat-icon>
+        <span>Listado de Heroes</span>
+      </a>
+      <a [routerLink]="['agregar']" mat-list-item (click)="sidenav.close()">
+        <mat-icon mat-list-icon>person_add_alt_1</mat-icon>
+        <span>Agregar Heroe</span>
+      </a>
+      <a [routerLink]="['buscar']" mat-list-item (click)="sidenav.close()">
+        <mat-icon mat-list-icon>search</mat-icon>
+        <span>Buscar Héroe</span>
+      </a>
+    </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
     <mat-toolbar>
-      <button mat-icon-button class="example-icon" (click)="sidenav.toggle()" aria-label="Example icon-button with menu icon">
+      <button mat-icon-button class="me-2" (click)="sidenav.toggle()" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>My App</span>
-      <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
+      <span>Super Héroes App</span>
+      <span class="spacer"></span>
+      <button mat-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>logout</mat-icon>
+        Logout
       </button>
     </mat-toolbar>
+    <!-- Mostrar el contenido de las rutas hijas registradas en el módulo asociado con este componente -->
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
 
 
 
-<!-- Mostrar el contenido de las rutas hijas registradas en el módulo asociado con este componente -->
-<!-- <router-outlet></router-outlet> -->
+
