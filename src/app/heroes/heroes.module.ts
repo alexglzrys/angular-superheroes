@@ -8,6 +8,7 @@ import { BuscarComponent } from './pages/buscar/buscar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HeroeComponent } from './pages/heroe/heroe.component';
 import { HeroesRoutingModule } from './heroes-routing.module';
+import { MaterialModule } from '../material/material.module';
 
 /**
  * Si un componente es creado dentro de un módulo, este se registra como parte de ese módulo.
@@ -29,6 +30,8 @@ import { HeroesRoutingModule } from './heroes-routing.module';
     HeroesRoutingModule,
     // Solo se usará este modulo de terceros en los componentes que adminstra este módulo (no en toda la aplicación)
     FlexLayoutModule,
+    // Los componentes que gestiona este módulo, harán uso de los componentes que exporta el modulo de Material
+    MaterialModule,
   ]
 })
 export class HeroesModule { }
