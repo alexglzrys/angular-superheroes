@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Heroe } from '../../interfaces/heroe';
 import { HeroesService } from '../../services/heroes.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { HeroesService } from '../../services/heroes.service';
 })
 export class ListadoComponent implements OnInit {
 
+  heroes: Heroe[] = [];
+
   // Inyectar el servicio de Heroes
   constructor(private heroesServices: HeroesService) { }
 
@@ -16,7 +19,10 @@ export class ListadoComponent implements OnInit {
   }
 
   getHeroes() {
-    this.heroesServices.getHeroes().subscribe(res => console.log(res))
+    this.heroesServices.getHeroes().subscribe(heroes => {
+      console.log(heroes)
+      this.heroes = heroes
+    })
   }
 
 }

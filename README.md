@@ -34,3 +34,15 @@ json-server --watch folderAPI/db.json
 ng g s modulo/services/nombreServicio --skip-tests  // Crear servicio sin archivo asociado de Tests
 ```
 
+## Interfaces
+Las interfaces nos permiten definir tipos de datos personalizados. Generalmente se les usa para definir el tipo de dato de cada propiedad declarada en un objeto, mismo que puede representar la información de una entidad en el sistema, o la respuesta entregada por un server.
+
+Existen algunos servicios en la red que nos pemiten generar nuestras interfaces a partir de la repuesta del server
+**https://app.quicktype.io/**
+
+Tambien existen plugins de vs-Code que permiten obtener la representación de una interfaz con base a una respuesta emitida por un server **JSON to TS**
+
+```
+ng g i modulo/interfaces/nombreInterfaz
+```
+
