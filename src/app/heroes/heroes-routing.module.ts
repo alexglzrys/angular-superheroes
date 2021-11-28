@@ -3,12 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { AgregarComponent } from './pages/agregar/agregar.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { HeroeComponent } from './pages/heroe/heroe.component';
+import { HomeComponent } from './pages/home/home.component';
 import { ListadoComponent } from './pages/listado/listado.component';
 
 // Definición de rutas principales para este módulo
 const routes: Routes = [
   {
+    // Las rutas hijas por lo general se mostrarán con otro estilo visual, o dentro de otro Layout que las difencíe de otros módulos o apartados de la aplicación
     path: '',
+    component: HomeComponent,   // Este componente funge como el Layout para el módulo de Heroes (debe tener declarado su router-outlet para mostrar el contenido de sus hijos)
     children: [
       {
         path: 'listado',

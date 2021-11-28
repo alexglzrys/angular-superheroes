@@ -14,6 +14,7 @@ const routes: Routes = [
   {
     path: 'heroes',
     // Registrar las rutas del módulo Heroes como hijas de la aplicación
+    // No se registra el archivo de rutas de forma explicita, ya que este se encuentra previamente registrado en su módulo correspondiente
     loadChildren: () => import('./heroes/heroes.module').then(m => m.HeroesModule),
   },
   {
