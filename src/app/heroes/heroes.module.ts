@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { AgregarComponent } from './pages/agregar/agregar.component';
 import { ListadoComponent } from './pages/listado/listado.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
@@ -25,6 +27,8 @@ import { HeroesRoutingModule } from './heroes-routing.module';
     CommonModule,
     // Importar las rutas principales para este módulo (que a su vez son rutas hijas para la aplicación principal)
     HeroesRoutingModule,
+    // Solo se usará este modulo de terceros en los componentes que adminstra este módulo (no en toda la aplicación)
+    FlexLayoutModule,
   ]
 })
 export class HeroesModule { }
