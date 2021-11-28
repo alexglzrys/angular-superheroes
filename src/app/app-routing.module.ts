@@ -5,6 +5,13 @@ import { ErrorPageComponent } from './shared/error-page/error-page.component';
 // Arreglo con declaración de rutas
 const routes: Routes = [
   {
+    path: 'auth',
+    // Cargar módulos con rutas hijas registradas
+    // La carga se hace de forma perezosa. Es decir, estos archivos se cargan bajo demanda, lo que hace que nuestra aplicación sea más liviana
+    // auth/segmento-hijo
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+  },
+  {
     path: '404',
     // Cargar de forma explicita el componente (se requiere importar el componente en si)
     component: ErrorPageComponent
