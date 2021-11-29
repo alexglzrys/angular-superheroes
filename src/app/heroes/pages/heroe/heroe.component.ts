@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-heroe',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeroeComponent implements OnInit {
 
-  constructor() { }
+  // Inyectar el servicio que nos permite conocer los parámetros enviados a la ruta
+  constructor(private activatedRouter: ActivatedRoute) { }
 
   ngOnInit(): void {
+    // Determinar que parámetro fue enviado en la ruta
+    this.activatedRouter.params.subscribe((params: Params) => {
+      console.log(params.id)
+    })
   }
 
 }
