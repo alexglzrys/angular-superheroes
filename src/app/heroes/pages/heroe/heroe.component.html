@@ -1,4 +1,6 @@
 <!-- El componente grid en Angular Material se usa para centrar en la vertical y horizontal sus elementos -->
+
+<!-- Mostrar Spinner mientras la información que viene desde el servicio aun no este listo -->
 <mat-grid-list cols="1" rowHeight="2:1" *ngIf="!heroe; else content">
   <mat-grid-tile>
     <mat-spinner></mat-spinner>
