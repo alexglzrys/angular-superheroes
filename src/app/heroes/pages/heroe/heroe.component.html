@@ -6,7 +6,30 @@
 </mat-grid-list>
 
 <ng-template #content>
-  <h2>Información del Super Héroe {{ heroe.superhero }}</h2>
-  <pre>{{ heroe | json }}</pre>
+  <div fxLayout.xs="column" fxLayout="row" fxLayoutGap="30px" fxFlexAlign="center" >
+    <div fxFlex="calc(25% - 30px)"
+      fxFlex.md="calc(35% - 30px)"
+      fxFlex.sm="calc(50% - 30px)"
+      fxFlex.xs="100">
+      <h2>Super Héroe {{ heroe.superhero }} - {{ heroe.alter_ego }}</h2>
+      <mat-divider></mat-divider>
+      <br>
+      <img [src]="heroe | imagen" [alt]="heroe.superhero" class="img-fluid w-100">
+    </div>
+    <div fxFlex="calc(75% - 30px)" fxFlex.md="calc(65% - 20px)" fxFlex.sm="calc(50% - 30px)" fxFlex.xs="100">
+      <h2>Casa Productora {{ heroe.publisher }}</h2>
+      <mat-divider></mat-divider>
+      <mat-list>
+        <mat-list-item>Desde: {{ heroe.first_appearance }}</mat-list-item>
+        <mat-list-item>Personajes: {{ heroe.characters }}</mat-list-item>
+        <mat-list-item>Por: {{ heroe.publisher }}</mat-list-item>
+        <mat-list-item>Nombre: {{ heroe.alter_ego }}</mat-list-item>
+      </mat-list>
+      <pre>{{ heroe | json }}</pre>
+      <a [routerLink]="['/heroes/listado']" mat-button color="warn">Regresar</a>
+    </div>
+  </div>
+
+
 </ng-template>
 
