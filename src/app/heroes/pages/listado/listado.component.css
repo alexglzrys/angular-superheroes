@@ -1,3 +1,38 @@
 .card-item {
   margin-bottom: 2rem;
 }
+
+
+@media screen and (min-width: 600px) {
+  .card-item:nth-child(even) {
+    margin-right: 0 !important;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .card-item:nth-child(3n) {
+    margin-right: 0 !important;
+  }
+  .card-item:nth-child(even) {
+    margin-right: 20px !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .card-item:nth-child(4n) {
+    margin-right: 0 !important;
+  }
+  .card-item:nth-child(3n) {
+    margin-right: 20px !important;
+  }
+}
+
+
+@media screen and (min-width: 1920px) {
+  .card-item:nth-child(5n) {
+    margin-right: 0 !important;
+  }
+  .card-item:nth-child(4n) {
+    margin-right: 20px !important;
+  }
+}

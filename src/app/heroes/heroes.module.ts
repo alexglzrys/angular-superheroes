@@ -10,6 +10,7 @@ import { HeroeComponent } from './pages/heroe/heroe.component';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.component';
+import { ImagenPipe } from './pipes/imagen.pipe';
 
 /**
  * Si un componente es creado dentro de un módulo, este se registra como parte de ese módulo.
@@ -24,7 +25,8 @@ import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.
     BuscarComponent,
     HomeComponent,
     HeroeComponent,
-    HeroeTarjetaComponent
+    HeroeTarjetaComponent,
+    ImagenPipe
   ],
   imports: [
     CommonModule,
