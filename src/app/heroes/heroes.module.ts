@@ -9,6 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeroeComponent } from './pages/heroe/heroe.component';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.component';
 
 /**
  * Si un componente es creado dentro de un módulo, este se registra como parte de ese módulo.
@@ -22,7 +23,8 @@ import { MaterialModule } from '../material/material.module';
     ListadoComponent,
     BuscarComponent,
     HomeComponent,
-    HeroeComponent
+    HeroeComponent,
+    HeroeTarjetaComponent
   ],
   imports: [
     CommonModule,
