@@ -17,4 +17,9 @@ export class HeroesService {
     // Indicar a TS que la data devuelta es un arreglo de tipo Heroes
     return this.http.get<Heroe[]>('http://localhost:3000/heroes');
   }
+
+  // El método devuelve un Observable de tipo Heroe
+  getHeroe(id: string): Observable<Heroe> {
+    return this.http.get<Heroe>(`http://localhost:3000/heroes/${id}`);
+  }
 }

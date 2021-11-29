@@ -1,1 +1,12 @@
-<p>heroe works!</p>
+<!-- El componente grid en Angular Material se usa para centrar en la vertical y horizontal sus elementos -->
+<mat-grid-list cols="1" rowHeight="2:1" *ngIf="!heroe; else content">
+  <mat-grid-tile>
+    <mat-spinner></mat-spinner>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #content>
+  <h2>Información del Super Héroe {{ heroe.superhero }}</h2>
+  <pre>{{ heroe | json }}</pre>
+</ng-template>
+
