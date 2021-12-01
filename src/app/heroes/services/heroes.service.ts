@@ -26,4 +26,9 @@ export class HeroesService {
   getHeroe(id: string): Observable<Heroe> {
     return this.http.get<Heroe>(`${this.baseUrl}/heroes/${id}`);
   }
+
+  // Devolver super heroes que coinciden con el término de búsqueda (json-server limita los resultados con el query _limit)
+  getSugerencias(termino: string): Observable<Heroe[]> {
+    return this.http.get<Heroe[]>(`${this.baseUrl}/heroes?q=${termino}&_limit=6`);
+  }
 }

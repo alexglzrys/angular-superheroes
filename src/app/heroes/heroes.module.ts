@@ -11,6 +11,7 @@ import { HeroesRoutingModule } from './heroes-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.component';
 import { ImagenPipe } from './pipes/imagen.pipe';
+import { FormsModule } from '@angular/forms';
 
 /**
  * Si un componente es creado dentro de un módulo, este se registra como parte de ese módulo.
@@ -36,6 +37,7 @@ import { ImagenPipe } from './pipes/imagen.pipe';
     FlexLayoutModule,
     // Los componentes que gestiona este módulo, harán uso de los componentes que exporta el modulo de Material
     MaterialModule,
+    FormsModule,
   ]
 })
 export class HeroesModule { }
