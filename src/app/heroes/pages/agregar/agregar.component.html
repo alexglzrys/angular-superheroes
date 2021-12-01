@@ -5,24 +5,24 @@
       <div fxLayout="row" class="mb-4">
         <mat-form-field fxFlex="48">
           <mat-label>Super Héroe</mat-label>
-          <input type="text" matInput required>
+          <input type="text" matInput [(ngModel)]="heroe.superhero" required>
         </mat-form-field>
         <mat-form-field fxFlex="48" class="ms-auto">
           <mat-label>Alter Ego</mat-label>
-          <input type="text" matInput required>
+          <input type="text" matInput [(ngModel)]="heroe.alter_ego" required>
         </mat-form-field>
       </div>
       <mat-form-field fxFlex="100">
         <mat-label>Primera Aparición</mat-label>
-        <input type="text" matInput required>
+        <input type="text" matInput [(ngModel)]="heroe.first_appearance" required>
       </mat-form-field>
       <mat-form-field fxFlex="100">
         <mat-label>Personajes</mat-label>
-        <input type="text" matInput required>
+        <input type="text" matInput [(ngModel)]="heroe.characters" required>
       </mat-form-field>
       <mat-form-field fxFlex="100">
         <mat-label>Creador</mat-label>
-        <mat-select>
+        <mat-select required [(ngModel)]="heroe.publisher">
           <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">{{ publisher.desc }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -31,7 +31,7 @@
         <input type="url" matInput required>
       </mat-form-field>
       <br>
-      <button mat-button color="primary">
+      <button mat-button color="primary" (click)="guardarHeroe()">
         <mat-icon>plus_one</mat-icon>
         Guardar
       </button>
