@@ -11,9 +11,11 @@ import { HeroesService } from '../../services/heroes.service';
 })
 export class BuscarComponent implements OnInit {
 
-  termino!: string;
-  heroes!: Observable<Heroe[]>;
-  infoHeroeSeleccionado!: Observable<Heroe>;
+  termino: string = '';
+  // heroes!: Observable<Heroe[]>;
+  heroes!: Heroe[];
+  // infoHeroeSeleccionado!: Observable<Heroe>;
+  infoHeroeSeleccionado: Heroe | undefined;
 
   constructor(private heroesService: HeroesService) { }
 
@@ -25,16 +27,28 @@ export class BuscarComponent implements OnInit {
   // Buscar super heroes que coincidan con el término de busqueda, y mostrarlos en el listado de sugerencias (AutoComplete Material)
   buscando() {
     // La suscripción a estos Observables se hacen desde la vista, con el pipe async
-    this.heroes = this.heroesService.getSugerencias(this.termino);
+    // this.heroes = this.heroesService.getSugerencias(this.termino);
+    this.heroesService.getSugerencias(this.termino).subscribe(heroes => {
+      this.heroes = heroes
+    })
   }
 
   // Devuelve información del super heroe seleccionado en el AutoComplete, evento optionSelected
   heroeSeleccionado(event: MatAutocompleteSelectedEvent) {
     // console.log(event)
-    const heroe:Heroe = event.option.value;
+
+    if (!event.option.value) {
+      this.infoHeroeSeleccionado = undefined
+      return;
+    }
+
+    const heroe: Heroe = event.option.value;
     this.termino = heroe.superhero
 
-    this.infoHeroeSeleccionado = this.heroesService.getHeroe(heroe.id!)
+    // this.infoHeroeSeleccionado = this.heroesService.getHeroe(heroe.id!)
+    this.heroesService.getHeroe(heroe.id!).subscribe(heroe => {
+      this.infoHeroeSeleccionado = heroe;
+    })
   }
 
 }
