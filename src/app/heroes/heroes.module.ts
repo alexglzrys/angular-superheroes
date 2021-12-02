@@ -12,6 +12,7 @@ import { MaterialModule } from '../material/material.module';
 import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.component';
 import { ImagenPipe } from './pipes/imagen.pipe';
 import { FormsModule } from '@angular/forms';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 /**
  * Si un componente es creado dentro de un módulo, este se registra como parte de ese módulo.
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     HeroeComponent,
     HeroeTarjetaComponent,
-    ImagenPipe
+    ImagenPipe,
+    ConfirmationComponent
   ],
   imports: [
     CommonModule,

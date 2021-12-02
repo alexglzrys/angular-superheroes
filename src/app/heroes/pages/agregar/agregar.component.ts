@@ -4,6 +4,8 @@ import { Heroe, Publisher } from '../../interfaces/heroe';
 import { HeroesService } from '../../services/heroes.service';
 import { switchMap } from "rxjs/operators";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationComponent } from '../../components/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-agregar',
@@ -32,12 +34,13 @@ export class AgregarComponent implements OnInit {
     alt_image: ''
   }
 
-  // El componente snackBarr no tiene una plantilla HTML, solo es inyectar el servicio
+  // El componente MatSnackBar y matDialog no tiene una plantilla HTML, solo es inyectar el servicio
 
   constructor(private heroesService: HeroesService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private snckBar: MatSnackBar) { }
+              private snckBar: MatSnackBar,
+              private matDialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -82,10 +85,25 @@ export class AgregarComponent implements OnInit {
   }
 
   eliminar() {
-    this.heroesService.deleteHeroe(this.heroe.id!).subscribe(res => {
-      console.log('Heroe eliminado')
-      this.router.navigate(['/heroes'])
+    // Se guarda el dialogo en una constante para observar cuando se cierra, y porceder a realizar una determinada acción (borrar)
+    const dialog = this.matDialog.open(ConfirmationComponent, {
+      width: '350px',
+      // Enviarle data al componente mostrado en mi dialogo
+      data: {...this.heroe}
     })
+
+    dialog.afterClosed().subscribe(res => {
+      if (res) {
+        // Si la respuesta es TRUE, entonces borramos
+        this.heroesService.deleteHeroe(this.heroe.id!).subscribe(res => {
+          console.log('Heroe eliminado')
+          // Mostrar mensaje de confirmación
+          this.mostrarSnackBar('Heroe eliminado correctamente')
+          this.router.navigate(['/heroes'])
+        })
+      }
+    })
+
   }
 
   // Mostrar un componente snackbar, con el mensaje pasado como parémetro y la duración especificada
