@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Heroe, Publisher } from '../../interfaces/heroe';
 import { HeroesService } from '../../services/heroes.service';
 import { switchMap } from "rxjs/operators";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-agregar',
@@ -31,9 +32,12 @@ export class AgregarComponent implements OnInit {
     alt_image: ''
   }
 
+  // El componente snackBarr no tiene una plantilla HTML, solo es inyectar el servicio
+
   constructor(private heroesService: HeroesService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private snckBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -60,6 +64,8 @@ export class AgregarComponent implements OnInit {
       // Actualizar
       this.heroesService.updateHeroe(this.heroe).subscribe(heroe => {
         console.log('Heroe modificado', heroe)
+        // Mostrar un mensaje toast de confirmación
+        this.mostrarSnackBar('Heroe actualizado correctamente')
         // Navegar a otra ruta
         this.router.navigate(['/heroes/listado']);
       })
@@ -67,6 +73,8 @@ export class AgregarComponent implements OnInit {
       // Registrar
       this.heroesService.saveHeroe(this.heroe).subscribe(heroe => {
         console.log('Heroe agregado', heroe)
+        // Mostrar un mensaje toast de confirmación
+        this.mostrarSnackBar('Heroe registrado correctamente')
         // Navegar a otra ruta
         this.router.navigate(['/heroes/editar', heroe.id]);
       })
@@ -77,6 +85,13 @@ export class AgregarComponent implements OnInit {
     this.heroesService.deleteHeroe(this.heroe.id!).subscribe(res => {
       console.log('Heroe eliminado')
       this.router.navigate(['/heroes'])
+    })
+  }
+
+  // Mostrar un componente snackbar, con el mensaje pasado como parémetro y la duración especificada
+  mostrarSnackBar(message: string) {
+    this.snckBar.open(message, 'ok', {
+      duration: 2500
     })
   }
 
