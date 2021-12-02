@@ -1,5 +1,8 @@
 <div class="container-fluid p-4 ">
-  <h2>Nuevo Super Heroe</h2>
+  <!-- Condicionar el titulo del formulario: Edición / Registro -->
+  <h2 *ngIf="heroe.id; else newHeroeTitle">Editar Super Heroe: <span class="text-primary">{{ heroe.superhero }}</span></h2>
+  <ng-template #newHeroeTitle>Nuevo Super Heroe</ng-template>
+
   <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="40px">
     <div fxFlex="50" fxLayout="column">
       <div fxLayout="row" class="mb-4">
@@ -28,12 +31,19 @@
       </mat-form-field>
       <mat-form-field fxFlex="100">
         <mat-label>Foto URL</mat-label>
-        <input type="url" matInput required>
+        <input type="url" [(ngModel)]=heroe.alt_image matInput required>
       </mat-form-field>
       <br>
-      <button mat-button color="primary" (click)="guardarHeroe()">
-        <mat-icon>plus_one</mat-icon>
-        Guardar
+      <button mat-button color="primary" (click)="guardar()">
+        <!-- Condicionar el titulo del botón de formulario: Edición / Registro -->
+        <ng-container *ngIf="heroe.id; else newHeroeLabel">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </ng-container>
+        <ng-template #newHeroeLabel>
+          <mat-icon>plus_one</mat-icon>
+          Guardar
+        </ng-template>
       </button>
     </div>
     <div fxFlex="50">
