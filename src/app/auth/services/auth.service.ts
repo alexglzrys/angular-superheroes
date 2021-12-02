@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Auth } from '../interfaces/auth';
 
@@ -30,14 +30,40 @@ export class AuthService {
     // Tap siempre regresa la respuesta del operador anterior (por tanto no se le usa para transformarla)
     return this.http.get<Auth>(`${this.BASE_URL}/usuarios/1`).pipe(
       tap(res => this._auth = {...res}),
-      // Me interesa guardar en localStorage el id del usuario logeado (SIMULAR UN TOKEN)
+      // Me interesa guardar en localStorage el id del usuario logeado (SIMULAR UN JSON WEB TOKEN)
       // Esto es importante ya que el protocolo HTTP es sin estado
-      tap(res => localStorage.setItem('id', res.id!))
+      tap(res => localStorage.setItem('token', res.id!))
     )
   }
 
   // Setear mi objeto que permite saber si estoy logeado o no
   logout() {
     this._auth = undefined;
+    // Borrar el Token alamcenado en LocalStorage
+    localStorage.removeItem('token')
+  }
+
+  // Este método es el que se debería llamar en los guards para saber si el usuario puede o no puede acceder a determinada ruta
+  verificarSiExisteUsuarioLogeado(): Observable<boolean> {
+    // Si no existe el tocken en localStorage, se supone que el usuario no se encuntra logeado
+    if (!localStorage.getItem('token')) {
+      // Convertir una respuesta a observable
+      return of(false)
+    }
+
+    // return of(true)
+
+    // Si los datos basicos del usuario no se encuntran en el token (nombre, email), es necesario volver a consultarlos con el servicio
+    return this.http.get<Auth>(`${this.BASE_URL}/usuarios/1`)
+      .pipe(
+        // Me interesa transformar la respuesta original (objeto con la data del usuario) en un valor booleno
+        map(auth => {
+          console.log('Datos que recibe el operador map', auth)
+          this._auth = {...auth}
+          // aqui estaríamos returnando el Observable<boolen>
+          return true;
+        })
+      )
+
   }
 }

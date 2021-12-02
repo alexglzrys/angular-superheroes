@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 
 /**
@@ -14,7 +15,8 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuard implements CanLoad, CanActivate {
 
   // Por lo general siempre inyectaremos un servicio que nos permita saber si el usuario esta logeado o no
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   /**
    * Permite verificar si se debe mostrar o no el contenido de una ruta
@@ -35,13 +37,24 @@ export class AuthGuard implements CanLoad, CanActivate {
       console.log(state)
 
       // Verificar la info si el usuairo puede acceder o no
-      if (this.authService.auth.id) {
-        return true
-      }
+      // if (this.authService.auth.id) {
+      //   return true
+      // }
 
-      console.log('Acceso denegado por - CanActivate')
+      // Me interesa atrapar la respuesta del observable para redireccionar si no existe un usuairo
+      return this.authService.verificarSiExisteUsuarioLogeado().pipe(
+        tap(estaLogeado => {
+          if (!estaLogeado) {
+            console.log('Acceso denegado por - CanActivate')
+            this.router.navigate(['/auth/login'])
+          }
+          // Si la respuesta del observable es TRUE, simplemente no hacemos nada, y lo dejara pasar, ya que esta es la respuesta final y se retornará (return true)
+        })
+      )
+
+      // console.log('Acceso denegado por - CanActivate')
       // Negar acceso
-      return false;
+      // return false;
 
   }
 
@@ -63,12 +76,23 @@ export class AuthGuard implements CanLoad, CanActivate {
       console.log(segments)
 
       // Verificar la info si el usuairo puede acceder o no
-      if (this.authService.auth.id) {
-        return true
-      }
+      // if (this.authService.auth.id) {
+      //   return true
+      // }
 
-      console.log('Acceso denegado por - CanLoad')
+      // Me interesa atrapar la respuesta del observable para redireccionar si no existe un usuairo
+      return this.authService.verificarSiExisteUsuarioLogeado().pipe(
+        tap(estaLogeado => {
+          if (!estaLogeado) {
+            console.log('Acceso denegado por - CanLoad')
+            this.router.navigate(['/auth/login'])
+          }
+          // Si la respuesta del observable es TRUE, simplemente no hacemos nada, y lo dejara pasar
+        })
+      )
+
+      //console.log('Acceso denegado por - CanLoad')
       // Negar acceso
-      return false;
+      //return false;
   }
 }
