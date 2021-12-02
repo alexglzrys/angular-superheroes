@@ -39,4 +39,9 @@ export class HeroesService {
   updateHeroe(heroe: Heroe): Observable<Heroe> {
     return this.http.put<Heroe>(`${this.baseUrl}/heroes/${heroe.id}`, heroe)
   }
+
+  // El backend retorna un objeto vacio, por tanto queda a discresión si colocamos any o {}
+  deleteHeroe(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/heroes/${id}`)
+  }
 }

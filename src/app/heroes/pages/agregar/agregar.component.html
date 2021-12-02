@@ -34,17 +34,25 @@
         <input type="url" [(ngModel)]=heroe.alt_image matInput required>
       </mat-form-field>
       <br>
-      <button mat-button color="primary" (click)="guardar()">
-        <!-- Condicionar el titulo del botón de formulario: Edición / Registro -->
-        <ng-container *ngIf="heroe.id; else newHeroeLabel">
-          <mat-icon>edit</mat-icon>
-          Editar
-        </ng-container>
-        <ng-template #newHeroeLabel>
-          <mat-icon>plus_one</mat-icon>
-          Guardar
-        </ng-template>
-      </button>
+      <div class="d-flex justify-content-between">
+        <button mat-raised-button color="primary" (click)="guardar()">
+          <!-- Condicionar el titulo del botón de formulario: Edición / Registro -->
+          <ng-container *ngIf="heroe.id; else newHeroeLabel">
+            <mat-icon>edit</mat-icon>
+            Editar
+          </ng-container>
+          <ng-template #newHeroeLabel>
+            <mat-icon>plus_one</mat-icon>
+            Guardar
+          </ng-template>
+        </button>
+        <!-- El botón de eliminar un super héroe sólo estará dispobible en el formulario de actualización -->
+        <button mat-raised-button color="warn" *ngIf="heroe.id" (click)="eliminar()">
+          <mat-icon>delete</mat-icon>
+          Eliminar
+        </button>
+      </div>
+
     </div>
     <div fxFlex="50">
       <img [src]="heroe | imagen" [alt]="heroe.superhero" class="img-fluid">
