@@ -11,16 +11,39 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanLoad {
+export class AuthGuard implements CanLoad, CanActivate {
 
   // Por lo general siempre inyectaremos un servicio que nos permita saber si el usuario esta logeado o no
   constructor(private authService: AuthService) { }
 
-  /*canActivate(
+  /**
+   * Permite verificar si se debe mostrar o no el contenido de una ruta
+   *
+   * Nota: No importa que una ruta tengo varios guards de diferente tipo registrados,
+   * Por ejemplo.
+   * En este caso ya se pudo haber cargado previamente un modulo, pero si se registra este canActivate, negará el acceso
+   * ya que el id del objeto de usuario logeado no existe.
+   *
+   * Para que funcione se debe registrar en la propiedad canActivate de la ruta a proteger en cuestión
+   */
+  canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }*/
+
+      console.log('Activando Guard - CanActivate')
+      console.log(route)
+      console.log(state)
+
+      // Verificar la info si el usuairo puede acceder o no
+      if (this.authService.auth.id) {
+        return true
+      }
+
+      console.log('Acceso denegado por - CanActivate')
+      // Negar acceso
+      return false;
+
+  }
 
   /**
    * Permite verificar si se debe cargar o no el módulo socilitado
@@ -35,7 +58,7 @@ export class AuthGuard implements CanLoad {
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      console.log('Activando Guard')
+      console.log('Activando Guard - Can Load')
       console.log(route)
       console.log(segments)
 
@@ -44,7 +67,7 @@ export class AuthGuard implements CanLoad {
         return true
       }
 
-      console.log('Acceso denegado')
+      console.log('Acceso denegado por - CanLoad')
       // Negar acceso
       return false;
   }

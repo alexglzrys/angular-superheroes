@@ -27,8 +27,12 @@ export class AuthService {
     // El operator tap RXjs permite realizar tareas secundarias entes de enviar la respuesta que retorna la suscripcipon
 
     // Me interesa guardar los datos del usuario en mi variable privada.
+    // Tap siempre regresa la respuesta del operador anterior (por tanto no se le usa para transformarla)
     return this.http.get<Auth>(`${this.BASE_URL}/usuarios/1`).pipe(
-      tap(res => this._auth = {...res})
+      tap(res => this._auth = {...res}),
+      // Me interesa guardar en localStorage el id del usuario logeado (SIMULAR UN TOKEN)
+      // Esto es importante ya que el protocolo HTTP es sin estado
+      tap(res => localStorage.setItem('id', res.id!))
     )
   }
 

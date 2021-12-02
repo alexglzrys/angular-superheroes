@@ -17,8 +17,10 @@ const routes: Routes = [
     // Registrar las rutas del módulo Heroes como hijas de la aplicación
     // No se registra el archivo de rutas de forma explicita, ya que este se encuentra previamente registrado en su módulo correspondiente
     loadChildren: () => import('./heroes/heroes.module').then(m => m.HeroesModule),
-    // Registrar un Guard del tipo canLoad para verificar si se debe cargar no el contenido de todo este módulo
-    canLoad: [AuthGuard]
+    // Registrar un Guard del tipo canLoad para verificar si se debe cargar o no el contenido de todo este módulo
+    canLoad: [AuthGuard],
+    // Registrar un Guard del tipo canActivate para verificar si se debe cargar o no el contenido de la ruta
+    canActivate: [AuthGuard]
   },
   {
     path: '404',
