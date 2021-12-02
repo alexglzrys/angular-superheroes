@@ -19,4 +19,12 @@ export class HeroeTarjetaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getAvatar(heroe: Heroe): string {
+    if (heroe.alt_image) {
+      return heroe.alt_image
+    } else {
+      return 'assets/heroes/' + heroe.id + '.jpg';
+    }
+  }
+
 }

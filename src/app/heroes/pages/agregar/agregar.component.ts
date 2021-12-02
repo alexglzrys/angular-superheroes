@@ -36,13 +36,19 @@ export class AgregarComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    // Los params retornan un observable
-    this.activatedRoute.params
+
+    // Solo recupero los parametros de ruta si estoy editando
+    if (this.router.url.includes('editar')) {
+      // Los params retornan un observable
+      this.activatedRoute.params
       .pipe(
         // Tomo el flujo y solo recupero el id (param), encadeno otro observable para obtener un heroe a partir de ese id
         switchMap(({id}) => this.heroesService.getHeroe(id))
         // me suscribo para obtener la info del heroe
       ).subscribe((heroe) => this.heroe = heroe)
+    }
+
+
   }
 
   guardar() {
