@@ -31,6 +31,8 @@
       </button>
       <span>Super Héroes App</span>
       <span class="spacer"></span>
+      <!-- Mostrar el nombre del usuario logeado -->
+      <span>{{ auth.usuario }}</span>
       <!-- Se podría colocar un rotuerLink para el botón de cerrar sesión, sin embargo, es necesario hacer cierta logica de negocio antes de redireccionar -->
       <button mat-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
         <mat-icon>logout</mat-icon>
