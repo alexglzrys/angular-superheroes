@@ -1,7 +1,9 @@
 <div class="container-fluid p-4 ">
   <!-- Condicionar el titulo del formulario: Edición / Registro -->
-  <h2 *ngIf="heroe.id; else newHeroeTitle">Editar Super Heroe: <span class="text-primary">{{ heroe.superhero }}</span></h2>
-  <ng-template #newHeroeTitle>Nuevo Super Heroe</ng-template>
+  <!-- <h2 *ngIf="heroe.id; else newHeroeTitle">Editar Super Heroe: <span class="text-primary">{{ heroe.superhero }}</span></h2>
+  <ng-template #newHeroeTitle>Nuevo Super Heroe</ng-template> -->
+
+  <h2>{{ (heroe.id) ? 'Editar' : 'Nuevo' }} Super Héroe <span class="text-primary">{{ heroe.superhero }}</span></h2>
 
   <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="40px">
     <div fxFlex="50" fxLayout="column">
