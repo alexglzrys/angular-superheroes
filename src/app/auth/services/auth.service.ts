@@ -31,4 +31,9 @@ export class AuthService {
       tap(res => this._auth = {...res})
     )
   }
+
+  // Setear mi objeto que permite saber si estoy logeado o no
+  logout() {
+    this._auth = undefined;
+  }
 }
